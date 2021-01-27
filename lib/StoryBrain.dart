@@ -1,6 +1,6 @@
 import 'Story.dart';
 class StoryBrain{
-  int _storyCounter=0;
+  int _storyNumber=0;
   List<Story> _storyData = [
    Story(
        storyTitle:'Your car has blown a tire on a winding road in the middle of nowhere with no cell phone reception. You decide to hitchhike. A rusty pickup truck rumbles to a stop next to you. A man with a wide brimmed hat with soulless eyes opens the passenger door for you and asks: "Need a ride, boy?".',
@@ -28,15 +28,42 @@ class StoryBrain{
        choice2: '')
   ];
   String getStory(){
-    return this._storyData[_storyCounter].storyTitle;
+    return this._storyData[_storyNumber].storyTitle;
   }
   String getChoice1(){
-    return this._storyData[_storyCounter].choice1;
+    return this._storyData[_storyNumber].choice1;
   }
   String getChoice2(){
-    return this._storyData[_storyCounter].choice2;
+    return this._storyData[_storyNumber].choice2;
   }
+  void nextStory(int choiceNumber){
+    if (choiceNumber == 1 && _storyNumber == 0) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 0) {
+      _storyNumber = 1;
+    } else if (choiceNumber == 1 && _storyNumber == 1) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 1) {
+      _storyNumber = 3;
+    } else if (choiceNumber == 1 && _storyNumber == 2) {
+      _storyNumber = 5;
+    } else if (choiceNumber == 2 && _storyNumber == 2) {
+      _storyNumber = 4;
+    }
+    else if (_storyNumber == 3 || _storyNumber == 4 || _storyNumber == 5) {
+      restart();
+    }
+  }//nextStory
 
-
+  void restart(){
+    this._storyNumber=0;
+  }
+  bool buttonShouldBeVisible(){
+    if (_storyNumber == 0 || _storyNumber == 1 || _storyNumber == 2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 }

@@ -37,6 +37,7 @@ class _StoryPageState extends State<StoryPage> {
                   child: Center(
                     child: Text(
                       storyBrain.getStory(),
+                      textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 25.0),
                     ),
                   ),
@@ -45,12 +46,17 @@ class _StoryPageState extends State<StoryPage> {
               Expanded(
                 flex: 2,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(4.0),
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        storyBrain.nextStory(1);
+                      });
+                    },
                     color: Colors.red,
                     child: Text(
-                      'Choice 1',
+                      storyBrain.getChoice1(),
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 25.0,
                       ),
@@ -61,14 +67,22 @@ class _StoryPageState extends State<StoryPage> {
               Expanded(
                 flex: 2,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FlatButton(
-                    onPressed: () {},
-                    color: Colors.green,
-                    child: Text(
-                      'Choice 2',
-                      style: TextStyle(
-                        fontSize: 25.0,
+                  padding: const EdgeInsets.all(4.0),
+                  child: Visibility(
+                    visible: storyBrain.buttonShouldBeVisible(),
+                    child: FlatButton(
+                      onPressed: () {
+                        setState(() {
+                          storyBrain.nextStory(2);
+                        });
+                      },
+                      color: Colors.green,
+                      child: Text(
+                        storyBrain.getChoice2(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 25.0,
+                        ),
                       ),
                     ),
                   ),
