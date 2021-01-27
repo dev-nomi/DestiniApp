@@ -1,3 +1,4 @@
+import 'package:destini_flutter/StoryBrain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -12,6 +13,8 @@ class Destini extends StatelessWidget {
     );
   }
 }
+
+StoryBrain storyBrain=StoryBrain();//create object of StoryBrain
 
 class StoryPage extends StatefulWidget {
   @override
@@ -33,7 +36,7 @@ class _StoryPageState extends State<StoryPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Text(
-                      'Story text will go here.',
+                      storyBrain.getStory(),
                       style: TextStyle(fontSize: 25.0),
                     ),
                   ),
